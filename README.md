@@ -51,16 +51,7 @@ Follow these setup steps from square to enable call back to your app: [Square Do
 
 <docgen-index>
 
-- [@MeikoTech/capacitor-square-inapp-payments](#meikotechcapacitor-square-inapp-payments)
-  - [Install](#install)
-  - [Usage](#usage)
-  - [API](#api)
-    - [startCardEntry(...)](#startcardentry)
-    - [startGooglePay(...)](#startgooglepay)
-    - [startApplePay(...)](#startapplepay)
-    - [addListener(...)](#addlistener)
-    - [Interfaces](#interfaces)
-      - [PluginListenerHandle](#pluginlistenerhandle)
+* [`echo(...)`](#echo)
 
 </docgen-index>
 

@@ -7,7 +7,7 @@
     <application>
         <meta-data
             android:name="sqip.SQUARE_APPLICATION_ID"
-            android:value="sandbox-sq0idb-OlkxiNAmB5ABlR21TahNrQ"/>
+            android:value="YOUR_APPLICATION_ID"/>
 
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
