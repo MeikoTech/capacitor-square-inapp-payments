@@ -1,6 +1,6 @@
 {
   "name": "capacitor-square-inapp-payments",
-  "version": "0.0.1",
+  "version": "0.1.8-beta.1",
   "description": "Capacitor Square plugin for Square In-app Payments SDK",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",

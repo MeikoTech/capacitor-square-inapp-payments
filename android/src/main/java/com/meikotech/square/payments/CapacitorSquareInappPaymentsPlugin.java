@@ -33,6 +33,10 @@ public class CapacitorSquareInappPaymentsPlugin extends Plugin {
 
     private CapacitorSquareInappPayments implementation = new CapacitorSquareInappPayments();
 
+    @PluginMethod
+    public void startApplePay(PluginCall call ) {
+        call.unimplemented("Not implemented on Android");
+    }
 
     @PluginMethod
     public void startCardPayment(PluginCall call) {
@@ -62,15 +66,15 @@ public class CapacitorSquareInappPaymentsPlugin extends Plugin {
     @ActivityCallback
     protected void handleOnResult(PluginCall call, ActivityResult result) {
         if (call == null) {
-            Log.d("NONCE", "NULL");
             return;
         }
-        String nonce = result.getData().getStringExtra("NONCE");
+
         JSObject response = new JSObject();
+        response.put("paymentMethod", "googlePay");
         response.put("cardNonce", result.getData().getStringExtra("cardNonce"));
         response.put("cardBrand", result.getData().getStringExtra("cardBrand"));
         response.put("cardLastFour", result.getData().getStringExtra("cardLastFour"));
         notifyListeners("cardDetailsSuccess", response);
-        Log.d("NONCE2", nonce);
+
     }
 }

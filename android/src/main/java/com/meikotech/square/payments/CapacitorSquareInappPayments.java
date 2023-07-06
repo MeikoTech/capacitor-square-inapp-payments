@@ -27,8 +27,6 @@ public class CapacitorSquareInappPayments extends AppCompatActivity {
     private static final int LOAD_PAYMENT_DATA_REQUEST_CODE = 1;
     private PaymentsClient paymentsClient;
 
-    String nonce;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,12 +40,8 @@ public class CapacitorSquareInappPayments extends AppCompatActivity {
         if ("googlePay".equals(action)) {
             initiateGooglePayment();
         }
-
-
-
     }
 
-//        startPayment();
     public void initiateCardPayment() {
         CardEntry.startCardEntryActivity(CapacitorSquareInappPayments.this);
     }
@@ -74,7 +68,7 @@ public class CapacitorSquareInappPayments extends AppCompatActivity {
         paymentsClient.isReadyToPay( GooglePay.createIsReadyToPayRequest() )
                 .addOnCompleteListener(
                         this,
-                        (task) -> Log.d("NONCE", "onCreate: ")
+                        (task) -> Log.d("readyToPay", "true")
         );
     }
 
@@ -86,7 +80,6 @@ public class CapacitorSquareInappPayments extends AppCompatActivity {
         Intent intent = getIntent();
 
         if (requestCode == LOAD_PAYMENT_DATA_REQUEST_CODE) {
-
             if (resultCode == Activity.RESULT_OK) {
                 PaymentData paymentData = PaymentData.getFromIntent(data);
                 if (paymentData != null && paymentData.getPaymentMethodToken() != null) {
@@ -94,10 +87,10 @@ public class CapacitorSquareInappPayments extends AppCompatActivity {
 
                     GooglePay.requestGooglePayNonce(googlePayToken).enqueue(result -> {
                         if (result.isSuccess()) {
-                            nonce = result.getSuccessValue().getNonce();
+                            String nonce = result.getSuccessValue().getNonce();
                             Card card = result.getSuccessValue().getCard();
 
-                            Log.d("NONCE", nonce);
+                            intent.putExtra("paymentMethod", "googlePay");
                             intent.putExtra("cardNonce", nonce);
                             intent.putExtra("cardBrand",  card.getBrand());
                             intent.putExtra("cardLastFour", card.getLastFourDigits());
@@ -128,7 +121,7 @@ public class CapacitorSquareInappPayments extends AppCompatActivity {
                 String brand = String.valueOf(card.getBrand());
                 String lastFour = String.valueOf(card.getLastFourDigits());
 
-                Log.d("NONCE", nonce);
+                intent.putExtra("paymentMethod", "cardEntry");
                 intent.putExtra("cardNonce", nonce);
                 intent.putExtra("cardBrand", brand);
                 intent.putExtra("cardLastFour", lastFour);
