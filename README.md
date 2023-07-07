@@ -15,6 +15,12 @@ npm install capacitor-square-inapp-payments
 npx cap sync
 ```
 
+IOS
+You'll need to add your Square Application ID to your AppDelegate [Square Documentation](https://developer.squareup.com/docs/in-app-payments-sdk/build-on-ios).
+
+ANDROID
+Open the plugins AndroidManifest.xml and update the Square Application ID
+
 ## Usage
 
 Card details response flow - React.js example
@@ -39,19 +45,17 @@ const Home = () => {
       chargeAmount: '5.12',
       countryCode: 'CA',
       currencyCode: 'CAD',
-      merchantId: 'merchant.com.spyce.delivery',
+      merchantId: 'YOUR APPLE MERCHANT ID',
     });
   };
 };
 ```
 
-Follow these setup steps from square to enable call back to your app: [Square Documentation](https://developer.squareup.com/docs/pos-api/build-on-ios#step-4-add-your-url-schemes).
-
 ## API
 
 <docgen-index>
 
-* [`echo(...)`](#echo)
+- [`echo(...)`](#echo)
 
 </docgen-index>
 
@@ -84,7 +88,7 @@ startGooglePay({ chargeAmount, currencyCode }) => any
 
 ### startApplePay(...)
 
-```typescript
+```javascript
 startApplePay({ chargeAmount, currencyCode, countryCode, merchantId }) => any
 ```
 
